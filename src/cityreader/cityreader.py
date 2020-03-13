@@ -78,6 +78,16 @@ for c in cities:
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
+lat1 = input("Please enter latitude for 1st point: ")
+lat1 = float(lat1)
+# print(f'This is the latitude entered: {lat1}')
+# print(f'This is the latitude type: {type(lat1)}')
+lon1 = input("Please enter longitude for 1st point: ")
+lon1 = float(lon1)
+lat2 = input("Please enter latitude for 2nd point: ")
+lat2 = float(lat2)
+lon2 = input("Please enter longitude for 2nd point: ")
+lon2 = float(lon2)
 
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
@@ -87,5 +97,23 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # TODO Ensure that the lat and lon valuse are all floats
     # Go through each city and check to see if it falls within
     # the specified coordinates.
+    if lat1 > lat2:
+        max_lat = lat1
+        min_lat = lat2
+    else:
+        max_lat = lat2
+        min_lat = lat1
+    if lon1 > lon2:
+        max_lon = lon1
+        min_lon = lon2
+    else:
+        max_lon = lon2
+        min_lon = lon1
+    within = [elem for elem in cities if min_lat < elem.lat and elem.lat <
+              max_lat and min_lon < elem.lon and elem.lon < max_lon]
 
     return within
+
+
+for i in cityreader_stretch(lat1, lon1, lat2, lon2, cities):
+    print(f'{i.name}: ({i.lat},{i.lon})')
